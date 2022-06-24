@@ -1,0 +1,32 @@
+# 增加点数
+def addit(a, b):
+    a = a + b
+    return a
+
+
+# 线缆时间
+def ex_addtime(a):
+    return a * 5
+
+
+# 附加点数计算
+def ex_add(a):
+    return a * 15
+
+
+# 计算所需时间(分钟)
+def enoughtime(a, b):
+    a = (a + b) * 0.8
+    return a
+
+
+# 分段处理设置时间
+def changeit(x):
+    if (x - int(x)) < 0.25:
+        return int(x) + 0.5
+    elif ((x - int(x)) >= 0.25) & ((x - int(x)) < 0.5):
+        return int(x) + 0.75
+    elif ((x - int(x)) >= 0.5) & ((x - int(x)) < 0.75):
+        return int(x) + 1
+    elif (x - int(x)) >= 0.75:
+        return int(x) + 1.25
