@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="pic">
+    <file>xw02.gif</file>
     <file>dwr.png</file>
   </qresource>
 </RCC>

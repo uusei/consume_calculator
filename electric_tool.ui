@@ -346,16 +346,16 @@
     <property name="title">
      <string>file</string>
     </property>
-    <addaction name="actioninfomatiation"/>
+    <addaction name="actioninformation"/>
    </widget>
    <addaction name="menufile"/>
   </widget>
-  <action name="actioninfomatiation">
+  <action name="actioninformation">
    <property name="text">
-    <string>infomatiation</string>
+    <string>information</string>
    </property>
    <property name="toolTip">
-    <string>infomatiation</string>
+    <string>information</string>
    </property>
    <property name="whatsThis">
     <string/>

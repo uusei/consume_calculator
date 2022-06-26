@@ -239,6 +239,6 @@ class Ui_MainWindow(object):
         self.pushButton_5.setText(_translate("MainWindow", "复制所需时间"))
         self.pushButton_6.setText(_translate("MainWindow", "清空所有空格"))
         self.menufile.setTitle(_translate("MainWindow", "选项"))
-        self.actioninfomatiation.setText(_translate("MainWindow", "infomation"))
-        self.actioninfomatiation.setToolTip(_translate("MainWindow", "infomation"))
+        self.actioninfomatiation.setText(_translate("MainWindow", "information"))
+        self.actioninfomatiation.setToolTip(_translate("MainWindow", "information"))
 
