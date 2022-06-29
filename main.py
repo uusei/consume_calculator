@@ -56,6 +56,7 @@ class elec_func(QMainWindow, Ui_MainWindow):
 
     # 粘贴件号
     def pasteit(self):
+        self.initate()
         clipboard = QApplication.clipboard()
         self.lineEdit.setText(clipboard.text())
 
@@ -86,6 +87,7 @@ class elec_func(QMainWindow, Ui_MainWindow):
         # 计算操作
         da1.ex_p = int(mk1.lineEdit_6.text())
         da1.ex_time = da1.ex_p * 15
+        da1.ex_time += ca.time_extra(da1.p_now)
         da1.ca_min = ca.enoughtime(da1.now_time, da1.ex_time)
         da1.ca_h = round(da1.ca_min / 60, 2)
         da1.se_h = ca.changeit(da1.ca_h)
@@ -112,20 +114,21 @@ class elec_func(QMainWindow, Ui_MainWindow):
 
     # 截图工具和图像处理方法
     def shootit(self):
-        # try:
-            import shoot
-            self.shin = shoot.WScreenShot()
-            self.shin.show()
+        import shoot
+        self.shin = shoot.WScreenShot()
+        self.shin.show()
+        try:
             self.shin.closed.connect(self.picpaste)
-            # self.reply = QMessageBox(QMessageBox.Question, "提示", "请截取正确的电线")
+        except:
+            self.reply = QMessageBox(QMessageBox.Question, "提示", "请截取正确的电线")
             #  添加自定义按钮
-            # self.reply.addButton('知道了', QMessageBox.YesRole)
-            # self.reply.addButton('也不是不可以啦', QMessageBox.NoRole)
-            # self.reply.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
-            # icon = QtGui.QIcon()
-            # icon.addPixmap(QtGui.QPixmap(":/pic/dwr.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-            # self.reply.setWindowIcon(icon)
-            # self.reply.show()
+            self.reply.addButton('知道了', QMessageBox.YesRole)
+            self.reply.addButton('也不是不可以啦', QMessageBox.NoRole)
+            self.reply.setWindowFlags(Qt.WindowStaysOnTopHint)
+            icon = QtGui.QIcon()
+            icon.addPixmap(QtGui.QPixmap(":/pic/dwr.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            self.reply.setWindowIcon(icon)
+            self.reply.show()
 
     def picpaste(self):
         import picform
