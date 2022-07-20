@@ -34,15 +34,11 @@ def changeit(x):
 
 # 分段加时
 def time_extra(x):
-    if x < 30:
-        return 0
-    elif (x >= 30) & (x < 50):
-        return 15
-    elif (x >= 50) & (x < 70):
+    if x < 50:
         return 30
-    elif (x >= 70) & (x < 90):
+    elif (x >= 50) & (x < 80):
         return 45
-    elif (x >= 90) & (x < 110):
+    elif (x >= 80) & (x < 110):
         return 60
     elif x >= 110:
         return 75

@@ -16,8 +16,8 @@ class elec_func(QMainWindow, Ui_MainWindow):
         # 初始化
         self.pushButton_6.clicked.connect(self.initate)
         self.pushButton.clicked.connect(self.pasteit)
-        self.actioninfomatiation.triggered.connect(self.link_xw)
-        self.pushButton_4.setToolTip("呃呃，其实是截图处理模块啦")
+        self.actioninformation.triggered.connect(self.link_xw)
+        self.pushButton_4.setToolTip("呃呃，是截图处理模块啦")
         self.pushButton_4.clicked.connect(self.shootit)
         # 线缆记点
         self.pushButton_2.clicked.connect(self.update_cable)
@@ -28,6 +28,9 @@ class elec_func(QMainWindow, Ui_MainWindow):
         # 复制到剪贴板
         self.pushButton_5.clicked.connect(self.copyit)
         self.lineEdit_11.returnPressed.connect(self.copyit)  # 绑定键盘上回车键
+        # 额外增加
+        self.pushButton_7.clicked.connect(self.update_extra)
+        self.lineEdit_12.returnPressed.connect(self.update_extra)
 
     # 初始化 全部置零
     def initate(self):
@@ -42,6 +45,7 @@ class elec_func(QMainWindow, Ui_MainWindow):
         da1.se_min = 0
         da1.se_h = 0.00
         da1.real_min = 0
+        da1.add_ex = 0
         self.lineEdit.setText(str(da1.k4n))
         self.lineEdit_2.setText(str(da1.now_time))
         self.lineEdit_3.setText(str(da1.ex_time))
@@ -53,6 +57,7 @@ class elec_func(QMainWindow, Ui_MainWindow):
         self.lineEdit_9.setText(str(da1.se_min))
         self.lineEdit_10.setText(str(da1.se_h))
         self.lineEdit_11.setText(str(da1.real_min))
+        self.lineEdit_12.setText(str(da1.add_ex))
 
     # 粘贴件号
     def pasteit(self):
@@ -70,6 +75,28 @@ class elec_func(QMainWindow, Ui_MainWindow):
             mk1.lineEdit_4.setText(str(da1.p_now))
             mk1.lineEdit_2.setText(str(da1.now_time))
             mk1.lineEdit_5.setText('')
+        except:
+            self.reply = QMessageBox(QMessageBox.Question, "提示", "请输入整数数字")
+            # 添加自定义按钮
+            self.reply.addButton('知道了', QMessageBox.YesRole)
+            self.reply.addButton('也不是不可以啦', QMessageBox.NoRole)
+            self.reply.setWindowFlags(Qt.WindowStaysOnTopHint)
+            icon = QtGui.QIcon()
+            icon.addPixmap(QtGui.QPixmap(":/pic/dwr.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+            self.reply.setWindowIcon(icon)
+            # 设置消息框中内容前面的图标
+            # self.reply.setIcon(1)
+            self.reply.show()
+
+    def update_extra(self):
+        try:
+            da1.ex_p = int(mk1.lineEdit_6.text())
+            da1.add_ex = int(mk1.lineEdit_12.text())
+            da1.ex_p = ca.addit(da1.ex_p, da1.add_ex)
+            mk1.lineEdit_6.setText(str(da1.ex_p))
+            mk1.lineEdit_12.setText('')
+            self.ex_cable()
+
         except:
             self.reply = QMessageBox(QMessageBox.Question, "提示", "请输入整数数字")
             # 添加自定义按钮
@@ -141,7 +168,7 @@ class elec_func(QMainWindow, Ui_MainWindow):
 
 
 class data1:
-    def __init__(self, k4n, now_time, ex_time, p_now, add_p, ex_p, ca_min, ca_h, se_min, se_h, real_min):
+    def __init__(self, k4n, now_time, ex_time, p_now, add_p, ex_p, ca_min, ca_h, se_min, se_h, real_min, add_ex):
         self.k4n = k4n  # 件号
         self.now_time = now_time  # 当前电路记录点
         self.ex_time = ex_time  # 附加时间
@@ -153,10 +180,11 @@ class data1:
         self.se_min = se_min  # 实际时间 分钟
         self.se_h = se_h  # 实际时间 小时
         self.real_min = real_min  # 扣除测试的时间
+        self. add_ex = add_ex  # 附加点增加
 
 
 if __name__ == "__main__":
-    da1 = data1('K4N10012345', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    da1 = data1('K4N10012345', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     app = QApplication(sys.argv)
     mk1 = elec_func()
     mk1.show()
